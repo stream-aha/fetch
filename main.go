@@ -116,6 +116,13 @@ func runFetch (c *cli.Context) error {
 		}
 	}
 
+	if len(latestTag) == 0 {
+		latestTag = options.TagConstraint
+		if latestTag[0] == '=' {
+			latestTag = latestTag[1:]
+		}
+	}
+
 	// Prepare the vars we'll need to download
 	repo, err := ParseUrlIntoGitHubRepo(options.RepoUrl, options.GithubToken)
 	if err != nil {
